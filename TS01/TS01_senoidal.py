@@ -26,19 +26,19 @@ Created on Sun Mar 30 03:12:15 2025
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-#Parametros de entrada del gegerador
-
-A_max = 0.5     #Amplitud [Volt]
-DC_offset = 0.5 #Componente de continua [Volt]
-Freq = 10.0     #Frecuencia [Hz]
-Phase = 0.0     #fase [Rad]
-
 #Parametos del Conversor A/D
 #Conviene Normalizar la resolucion espectral a 1Hz haciendo N_sample=Fs 
 N_sample = 1000
-Fs = 1000
+Fs = N_sample
 Ts = 1/Fs
+
+#Parametros de entrada del gegerador
+
+A_max = 1     #Amplitud [Volt]
+DC_offset = 0 #Componente de continua [Volt]
+Freq = 501    #Frecuencia [Hz]
+Phase = 0     #fase [Rad]
+
 
 
 
@@ -51,10 +51,9 @@ tt = np.arange(0, N_sample*Ts, Ts)
 xx = A_max * np.sin(2 * np.pi * Freq * tt + Phase) + DC_offset
 
 
+
 #Muestro el resultado
 plt.plot(tt, xx)
-plt.title('Generador de Señal Senoidal')
+plt.title(f'Señal Senoidal,Fs={Fs}, F={ Freq}, fase= {Phase}')
 plt.xlabel('Tiempo [Seg]')
 plt.ylabel('Amplitud [Volt]')
-
-
