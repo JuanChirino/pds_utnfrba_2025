@@ -31,13 +31,13 @@ def func_DFT(xx):
     # y el vector de Twiddle factors ww_factors, tuve que calcular el primer
     # elemento a pata porque me tiraba un "NameError: name 'XX' is not defined"
 
-    ww_factor = np.cos(2*np.pi*nn*0/N_sample) + 1j*np.sin(2*np.pi*nn*0/N_sample)
+    ww_factor = np.cos(2*np.pi*nn*0/N_sample) - 1j*np.sin(2*np.pi*nn*0/N_sample)
     XX = np.sum(xx*ww_factor)    
     
     
     for k in range(1,N_sample):
         #Genero el vector de Twiddle factors
-        ww_factor = np.cos(2*np.pi*nn*k/N_sample) + 1j*np.sin(2*np.pi*nn*k/N_sample)
+        ww_factor = np.cos(2*np.pi*nn*k/N_sample) - 1j*np.sin(2*np.pi*nn*k/N_sample)
         XX = np.append( XX ,np.sum(xx*ww_factor))
     
     return XX
@@ -66,6 +66,9 @@ F_0= 20
 xx = func_sen(1,0,F_0,0,N_sample,Fs)
 
 XX = func_DFT(xx)
+
+XX_angle = np.angle(XX) 
+XX_module= np.abs(XX)
 
 XX_fft = np.fft.fft(xx)
 
